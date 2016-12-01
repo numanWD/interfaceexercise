@@ -1,6 +1,14 @@
 package main
 
+import (
+	"fmt"
+)
+
 type Developers []Developer
+
+type Developer interface {
+	Say() string
+}
 
 type Java struct {
 	Name string
@@ -26,6 +34,20 @@ type C struct {
 	Explains string
 }
 
+func (d Php) Say() string {
+	return d.Shouts
+}
+
+func (d Go) Say() string {
+	return d.Says
+}
+func (d Java) Say() string {
+	return d.Says
+}
+func (d C) Say() string {
+	return d.Explains
+}
+
 func main() {
 	p := Developers{
 		Php{Name: "connor", Age: 22, Shouts: "I like things slow and loosely typed"},
@@ -39,4 +61,7 @@ func main() {
 	}
 
 	// Print out the results here
+	for _, language := range p {
+		fmt.Println(language.Say())
+	}
 }
